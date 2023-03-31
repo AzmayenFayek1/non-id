@@ -1,21 +1,21 @@
 const loadData = () => {
-  togoleLoader(true);
-  fetch("https://openapi.programming-hero.com/api/ai/tools")
+  togoleLoader(true)
+  fetch('https://openapi.programming-hero.com/api/ai/tools')
     .then((res) => res.json(res))
-    .then((data) => showData(data.data));
-};
+    .then((data) => showData(data.data))
+}
 const togoleLoader = (isLoading) => {
-  const loaderSection = document.getElementById("loader");
+  const loaderSection = document.getElementById('loader')
   if (isLoading) {
-    loaderSection.classList.remove("d-none");
+    loaderSection.classList.remove('d-none')
   } else {
-    loaderSection.classList.add("d-none");
+    loaderSection.classList.add('d-none')
   }
-};
+}
 const showData = ({ tools }) => {
-  const toolContainer = document.getElementById("tool-container");
+  const toolContainer = document.getElementById('tool-container')
   tools.map((tool) => {
-    const toolDiv = document.createElement("div");
+    const toolDiv = document.createElement('div')
     // toolDiv.classlit.add("col");
     toolDiv.innerHTML = `<div class="card h-100">
       <img src="${tool.image} " class="card-img-top" alt="...">
@@ -30,75 +30,73 @@ const showData = ({ tools }) => {
         </div>
         <div class="fa-duotone fa-calendar-days"> ${tool.published_in}</div>
       </div>
-    </div>`;
-    toolContainer.appendChild(toolDiv);
-  });
-  togoleLoader(false);
-};
+    </div>`
+    toolContainer.appendChild(toolDiv)
+  })
+  togoleLoader(false)
+}
 
 const singleToolData = (id) => {
-  togoleLoader(true);
-  let newId;
+  togoleLoader(true)
+  let newId
   if (id < 10) {
-    newId = "0" + `${id}`;
+    newId = '0' + `${id}`
   } else {
-    newId = id;
+    newId = id
   }
-  console.log(newId);
-  const url = `https://openapi.programming-hero.com/api/ai/tool/${newId}`;
+  console.log(newId)
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${newId}`
 
   fetch(url)
     .then((res) => res.json())
-    .then((data) => singleToolDataShow(data));
-};
+    .then((data) => singleToolDataShow(data))
+}
 
 const singleToolDataShow = ({ data }) => {
-  const toolContainer = document.getElementById("singaleDataShow");
-  console.log(data);
-  const toolDiv = document.createElement("div");
+  const toolContainer = document.getElementById('singaleDataShow')
+  console.log(data)
+  const toolDiv = document.createElement('div')
 
   toolDiv.innerHTML = `
 
-  <div class='d-flex gap-3'>
-  <div class="card">
-      
+  <div class=" d-flex gap-3"> 
   <div class="card-body">
   <div>
   <p class="fw-bold">${
-    data.description ? data.description : "no description found"
+    data.description ? data.description : 'no description found'
   } </p> </div>
   <div class="d-flex gap-2 justify-content-center">
   <div class="border w-50 py-3 px-1 rounded bg-white"> <small class="text-success"> ${
     data?.pricing === null || data.pricing[0].price <= 0
-      ? "free cost"
+      ? 'free cost'
       : data?.pricing[0].price
   } 
    </small>
    <small class="text-success"> ${
-     data.pricing ? data.pricing[0].plan : "Basic"
+     data.pricing ? data.pricing[0].plan : 'Basic'
    } </small>
    
    </div>
 
   <div class="border w-50 py-3 px-1 rounded bg-white"> <small class="text-success"> ${
     data?.pricing === null || data.pricing[1].price <= 0
-      ? "free cost"
+      ? 'free cost'
       : data?.pricing[1].price
   } 
    </small>
    <small class="text-success"> ${
-     data.pricing ? data.pricing[1].plan : "pro"
+     data.pricing ? data.pricing[1].plan : 'pro'
    } </small>
    
    </div>
   <div class="border w-50 py-3 px-1 rounded bg-white"> <small class="text-success"> ${
     data?.pricing === null || data.pricing[2].price <= 0
-      ? "free cost"
+      ? 'free cost'
       : data?.pricing[2].price
   } 
    </small>
    <small class="text-success"> ${
-     data.pricing ? data.pricing[2].plan : ""
+     data.pricing ? data.pricing[2].plan : ''
    } </small>
    
    
@@ -127,15 +125,15 @@ const singleToolDataShow = ({ data }) => {
         </p>
       </div>
     </div>
-  </div>
-  `;
-  toolContainer.appendChild(toolDiv);
-  togoleLoader(false);
-};
-const removeModalData = () => {
-  const toolContainer = document.getElementById("singaleDataShow");
-  toolContainer.innerHTML = `
-  `;
-};
 
-loadData();
+  `
+  toolContainer.appendChild(toolDiv)
+  togoleLoader(false)
+}
+const removeModalData = () => {
+  const toolContainer = document.getElementById('singaleDataShow')
+  toolContainer.innerHTML = `
+  `
+}
+
+loadData()
