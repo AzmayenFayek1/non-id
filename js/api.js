@@ -56,6 +56,15 @@ const singleToolDataShow = ({ data }) => {
   const toolContainer = document.getElementById('singaleDataShow')
   console.log(data)
   const toolDiv = document.createElement('div')
+  const allFeatures = []
+
+  for (const key in data.features) {
+    allFeatures.push(data.features[key].feature_name)
+  }
+
+
+  
+
 
   toolDiv.innerHTML = `
 
@@ -106,11 +115,17 @@ const singleToolDataShow = ({ data }) => {
   </div>
   <div class="d-flex justify-content-around">
   <div><h6>features </h6>
-  <p> ${data.feature_name} </p>
+  <div> <ul> 
+     ${allFeatures?.map((int) => `<li>${int}</li>`).join('')}
+  </ul> </div>
   </div>
   <div><h6>integrations
   </h6>
-  <p> ${data.integrations[0]} </p>
+ <div>
+  <ul> 
+     ${data.integrations.map((int) => `<li>${int}</li>`).join('')}
+  </ul>
+</div>
   </div>
   </div>
 </div>
@@ -119,9 +134,10 @@ const singleToolDataShow = ({ data }) => {
       <div class="card-body">
         <h5 class="card-title">${data.tool_name} </h5>
         <p class="card-text">
-          This is a longer card with supporting text below as a natural
-          lead-in to additional content. This content is a little bit
-          longer.
+        ${data.input_output_examples[0].input}
+        </p>
+        <p class="card-text">
+        ${data.input_output_examples[0].output}
         </p>
       </div>
     </div>
